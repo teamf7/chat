@@ -44,12 +44,14 @@ io.on("connection", function(socket) {
   });
 
   socket.on("disconnect", () => {
-    if (addedUser) --numUsers;
+    if (addedUser) {
+      --numUsers;
 
-    socket.broadcast.emit("user left", {
-      username: socket.username,
-      numUsers: numUsers
-    });
+      socket.broadcast.emit("user left", {
+        username: socket.username,
+        numUsers: numUsers
+      });
+    }
   });
 });
 
